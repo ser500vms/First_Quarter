@@ -6,10 +6,49 @@
 // Примеры:
 // ["Hello","2","world",";-)"] -> ["2",";-)"]
 
-string[] arrey = {"Hello","2","world",";-)"};
-Console.Write($"[{String.Join(", ", arrey)}]");
-for (int i = 0; i < arrey.Length; i++)
-    if (arrey[i].Length <= 3)
+int SizeForNewArray(string[] array)
+{
+    int sizeForNewArray = 0;
+    for (int i = 0; i < array.Length; i++)
     {
-        Console.Write(arrey[i]);
+        if (array[i].Length <= 3)
+        {
+            sizeForNewArray++;
+        }
     }
+    return sizeForNewArray;
+}
+
+string[] NewStringArray(string[] array)
+{
+    int size = SizeForNewArray(array);
+    string[] newStringArray = new string[size];
+    int z = 0;
+    for (int i = 0; i < array.Length; i++)
+    {
+        if (array[i].Length <= 3)
+        {
+            newStringArray[z] = array[i];
+            z++;
+        }
+    }
+    return newStringArray;
+}
+
+string[] GenerateUserArray(int size)
+{
+    string[] array = new string[size];
+    for (int i = 0; i < size; i++)
+    {
+        Console.Write($"Введите {i + 1}-ю строку: ");
+        array[i] = Console.ReadLine();
+    }
+    return array;
+}
+
+Console.Write("Введите колличество строк: ");
+int size = Convert.ToInt32(Console.ReadLine());
+string[] array = GenerateUserArray(size);
+string[] newStringArray = NewStringArray(array);
+Console.Write($"[{String.Join(", ", array)}] -> ");
+Console.Write($"[{String.Join(", ", newStringArray)}]");
