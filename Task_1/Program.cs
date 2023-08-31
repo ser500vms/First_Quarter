@@ -6,32 +6,19 @@
 // Примеры:
 // ["Hello","2","world",";-)"] -> ["2",";-)"]
 
-int SizeForNewArray(string[] array)
-{
-    int sizeForNewArray = 0;
-    for (int i = 0; i < array.Length; i++)
-    {
-        if (array[i].Length <= 3)
-        {
-            sizeForNewArray++;
-        }
-    }
-    return sizeForNewArray;
-}
-
 string[] NewStringArray(string[] array)
 {
-    int size = SizeForNewArray(array);
-    string[] newStringArray = new string[size];
-    int z = 0;
+    string[] newStringArray = new string[array.Length];
+    int count = 0;
     for (int i = 0; i < array.Length; i++)
     {
         if (array[i].Length <= 3)
         {
-            newStringArray[z] = array[i];
-            z++;
+            newStringArray[count] = array[i];
+            count++;
         }
     }
+    Array.Resize(ref newStringArray, count);
     return newStringArray;
 }
 
